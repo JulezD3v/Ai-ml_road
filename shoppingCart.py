@@ -8,13 +8,32 @@ def addItem(item):
 
 #Removing items from the cart
 
-def removeItem(item):
+def removeItem(identifier):
     clear_output()
     try:
-        cart.remove(item)
-        print(f"{item} has been removed from the cart")
-    
-    except:
+        if isinstance(identifier, str) and identifier.isdigit():
+            idx = int(identifier)-1
+            removed = cart.pop(idx)
+            print(f"{removed}, has been removed from your cart")
+            return
+        
+        try:
+          cart.remove(identifier)
+          print(f" Option {identifier} has been removed")
+          return
+        
+        except ValueError:
+            # CASE SENSITIVE MATCH
+            lowered = identifier.lower()
+            for i, itm in enumerate(cart):
+                if itm.lower() == lowered:
+                    removed - cart.pop(i)
+                    print(f"{removed} has been removed")
+                    return
+            #not found
+            raise ValueError
+     
+    except (ValueError, IndexError):
         print("Sorry item does not exist")
 
 def showCart():
@@ -23,8 +42,8 @@ def showCart():
     if cart:
         print("Here is your virtual cart 😎")
 
-        for item in cart :
-            print(f"-{item}")
+        for i, item in enumerate(cart,1) :
+            print(f"{i}. {item}")
         else:
             print("Your cart is empty")
 
