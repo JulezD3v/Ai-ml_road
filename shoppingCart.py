@@ -64,7 +64,7 @@ def main():
         ans = input("Key in what you want to do next: quit, add, remove, show, clear: ").lower()
 
         if ans == "quit":
-            print("Thank you for using our program 🥰, see next time.")
+            print("Thank you for using our program 🥰, see you next time.")
             showCart()
             done = True
       
